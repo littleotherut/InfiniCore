@@ -5,7 +5,7 @@ content='export INFINI_ROOT="$HOME/.infini"
 export LD_LIBRARY_PATH="$INFINI_ROOT/lib:$LD_LIBRARY_PATH"'
 
 # Check if bashrc file exists
-bashrc_file="$HOME/.bashrc"
+bashrc_file="$HOME/.zshrc"
 
 if [ ! -f "$bashrc_file" ]; then
     echo "Creating $bashrc_file file"
