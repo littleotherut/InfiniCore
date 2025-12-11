@@ -4,6 +4,7 @@
 
 #include "ops/add.hpp"
 #include "ops/attention.hpp"
+#include "ops/bitwise_left_shift.hpp"
 #include "ops/causal_softmax.hpp"
 #include "ops/embedding.hpp"
 #include "ops/linear.hpp"
@@ -23,6 +24,7 @@ namespace infinicore::ops {
 inline void bind(py::module &m) {
     bind_add(m);
     bind_attention(m);
+    bind_bitwise_left_shift(m);
     bind_causal_softmax(m);
     bind_random_sample(m);
     bind_linear(m);

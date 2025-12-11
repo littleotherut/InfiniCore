@@ -2,6 +2,7 @@
 
 #include "ops/add.hpp"
 #include "ops/attention.hpp"
+#include "ops/bitwise_left_shift.hpp"
 #include "ops/causal_softmax.hpp"
 #include "ops/matmul.hpp"
 #include "ops/ones.hpp"

@@ -44,6 +44,7 @@ from infinicore.ops.matmul import matmul
 from infinicore.ops.mul import mul
 from infinicore.ops.narrow import narrow
 from infinicore.ops.rearrange import rearrange
+from infinicore.ops.bitwise_left_shift import bitwise_left_shift
 from infinicore.tensor import (
     Tensor,
     empty,
@@ -99,6 +100,7 @@ __all__ = [
     # Operations.
     "add",
     "attention",
+    "bitwise_left_shift",
     "matmul",
     "mul",
     "narrow",
