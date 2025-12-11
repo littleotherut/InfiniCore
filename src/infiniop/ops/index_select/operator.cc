@@ -5,9 +5,9 @@
 #ifdef ENABLE_CPU_API
 #include "cpu/index_select_cpu.h"
 #endif
-// #if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API)
-// #include "nvidia/index_select_nvidia.cuh"
-// #endif
+#if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API)
+#include "nvidia/index_select_nvidia.cuh"
+#endif
 // #ifdef ENABLE_METAX_API
 // #include "metax/index_select_metax.cuh"
 // #endif
@@ -37,9 +37,9 @@ __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
 #ifdef ENABLE_CPU_API
         CREATE(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         CREATE(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        CREATE(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 // #ifdef ENABLE_ILUVATAR_API
 //         CREATE(INFINI_DEVICE_ILUVATAR, nvidia);
 // #endif
@@ -67,9 +67,9 @@ __C infiniStatus_t infiniopGetIndexSelectWorkspaceSize(
 #ifdef ENABLE_CPU_API
         GET(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         GET(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        GET(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 // #ifdef ENABLE_ILUVATAR_API
 //         GET(INFINI_DEVICE_ILUVATAR, nvidia);
 // #endif
@@ -102,9 +102,9 @@ __C infiniStatus_t infiniopIndexSelect(
 #ifdef ENABLE_CPU_API
         CALCULATE(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         CALCULATE(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        CALCULATE(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 // #ifdef ENABLE_ILUVATAR_API
 //         CALCULATE(INFINI_DEVICE_ILUVATAR, nvidia);
 // #endif
@@ -131,9 +131,9 @@ __C infiniStatus_t infiniopDestroyIndexSelectDescriptor(
 #ifdef ENABLE_CPU_API
         DESTROY(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         DESTROY(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        DESTROY(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 // #ifdef ENABLE_ILUVATAR_API
 //         DESTROY(INFINI_DEVICE_ILUVATAR, nvidia);
 // #endif
