@@ -119,7 +119,14 @@ bool InfiniopTensorDescriptor::isContiguous(size_t dim_start, size_t dim_end) co
         return false;
     }
 
-    return stride(dim_end) == ptrdiff_t(1);
+    // Find the last dimension with size > 1, its stride must be 1
+    for (size_t i = dim_end + 1; i > dim_start; --i) {
+        if (dim(i - 1) > 1) {
+            return stride(i - 1) == ptrdiff_t(1);
+        }
+    }
+    // All dimensions have size 1, considered contiguous
+    return true;
 }
 
 bool InfiniopTensorDescriptor::isContiguous() const {
