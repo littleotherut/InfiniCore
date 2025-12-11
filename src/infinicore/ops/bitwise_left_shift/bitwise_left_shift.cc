@@ -1,5 +1,7 @@
 #include "infinicore/ops/bitwise_left_shift.hpp"
 
+#include "../../utils.hpp"
+
 namespace infinicore::op {
 
 common::OpDispatcher<BitwiseLeftShift::schema> &BitwiseLeftShift::dispatcher() {
@@ -8,7 +10,9 @@ common::OpDispatcher<BitwiseLeftShift::schema> &BitwiseLeftShift::dispatcher() {
 };
 
 void BitwiseLeftShift::execute(Tensor c, Tensor a, Tensor b) {
-    dispatcher().lookup(context::getDevice().getType())(c, a, b);
+    INFINICORE_ASSERT_TENSORS_SAME_DEVICE(c, a, b);
+    infinicore::context::setDevice(c->device());
+    dispatcher().lookup(c->device().getType())(c, a, b);
 }
 
 Tensor bitwise_left_shift(Tensor a, Tensor b) {

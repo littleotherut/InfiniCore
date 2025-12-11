@@ -20,8 +20,8 @@ __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
     infiniopIndexSelectDescriptor_t *desc_ptr,
     infiniopTensorDescriptor_t y_desc,
     infiniopTensorDescriptor_t x_desc,
-    infiniopTensorDescriptor_t indices_desc,
-    int dim) {    
+    int dim,
+    infiniopTensorDescriptor_t indices_desc) {    
 
 #define CREATE(CASE, NAMESPACE)                                                 \
     case CASE:                                                                  \

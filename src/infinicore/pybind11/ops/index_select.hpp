@@ -12,8 +12,8 @@ inline void bind_index_select(py::module &m) {
     m.def("index_select",
           &op::index_select,
           py::arg("x"),
-          py::arg("indices"),
           py::arg("dim"),
+          py::arg("indices"),
           R"doc(Select elements from a tensor along a given dimension using indices.
 
 Args:
@@ -26,9 +26,10 @@ Args:
           &op::index_select_,
           py::arg("y"),
           py::arg("x"),
-          py::arg("indices"),
           py::arg("dim"),
+          py::arg("indices"),
           R"doc(Select elements from a tensor along a given dimension using indices.
+          
 Args:
     y: Output tensor   
     x: Input tensor

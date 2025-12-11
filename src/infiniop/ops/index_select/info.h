@@ -38,6 +38,10 @@ public:
         const size_t y_ndim = y_desc->ndim();
         const size_t x_ndim = x_desc->ndim();
 
+        if (dim < 0) {
+            dim += x_ndim;
+        }
+        
         if (y_ndim != x_ndim ) {
             return INFINI_STATUS_BAD_TENSOR_SHAPE;
         }

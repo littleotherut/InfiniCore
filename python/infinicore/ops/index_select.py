@@ -4,16 +4,9 @@ from infinicore.lib import _infinicore
 from infinicore.tensor import Tensor
 
 
-def index_select(
-    input: Tensor,
-    indices: Tensor,
-    dim: int = 0,
-    *,
-    out=None) -> Tensor:
+def index_select(input: Tensor, dim: int, indices: Tensor, *, out=None) -> Tensor:
     """Returns a new tensor which indexes the input tensor along dimension `dim`"""
-    
     if out is None:
-        return _infinicore.index_select(input, indices, dim)
-    else:
-        _infinicore.index_select_(out, input, indices, dim)
-        return out
+        return Tensor(_infinicore.index_select(input._underlying, dim, indices._underlying))
+    _infinicore.index_select_(out._underlying, input._underlying, dim, indices._underlying)
+    return out
