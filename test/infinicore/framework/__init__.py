@@ -2,6 +2,7 @@ from .base import TestConfig, TestRunner, BaseOperatorTest
 from .test_case import TestCase, TestResult
 from .benchmark import BenchmarkUtils, BenchmarkResult
 from .config import (
+    add_common_test_args,
     get_args,
     get_hardware_args_group,
     get_test_devices,
@@ -18,9 +19,10 @@ from .utils import (
     infinicore_tensor_from_torch,
     rearrange_tensor,
     convert_infinicore_to_torch,
-    is_integer_dtype,
+    is_broadcast,
     is_complex_dtype,
     is_floating_dtype,
+    is_integer_dtype,
 )
 
 __all__ = [
@@ -35,7 +37,9 @@ __all__ = [
     "TestConfig",
     "TestResult",
     "TestRunner",
+    "TestReporter",
     # Core functions
+    "add_common_test_args",
     "compare_results",
     "convert_infinicore_to_torch",
     "create_test_comparator",
@@ -51,9 +55,10 @@ __all__ = [
     "to_torch_dtype",
     "torch_device_map",
     # Type checking utilities
-    "is_integer_dtype",
+    "is_broadcast",
     "is_complex_dtype",
     "is_floating_dtype",
+    "is_integer_dtype",
     # Benchmarking utilities
     "BenchmarkUtils",
     "BenchmarkResult",
