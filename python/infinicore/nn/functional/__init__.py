@@ -1,5 +1,6 @@
 from .causal_softmax import causal_softmax
 from .embedding import embedding
+from .fold import fold
 from .linear import linear
 from .mish import mish
 from .random_sample import random_sample

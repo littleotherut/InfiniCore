@@ -7,6 +7,7 @@
 #include "ops/bitwise_left_shift.hpp"
 #include "ops/causal_softmax.hpp"
 #include "ops/embedding.hpp"
+#include "ops/fold.hpp"
 #include "ops/index_select.hpp"
 #include "ops/linear.hpp"
 #include "ops/log2.hpp"
@@ -29,6 +30,7 @@ inline void bind(py::module &m) {
     bind_attention(m);
     bind_bitwise_left_shift(m);
     bind_causal_softmax(m);
+    bind_fold(m);
     bind_random_sample(m);
     bind_index_select(m);
     bind_linear(m);

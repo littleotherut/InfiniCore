@@ -37,16 +37,12 @@
             Descriptor **desc_ptr,                               \
             infiniopTensorDescriptor_t y,                        \
             infiniopTensorDescriptor_t x,                        \
-            int output_height,                                   \
-            int output_width,                                    \
-            int kernel_height,                                   \
-            int kernel_width,                                    \
-            int dilation_height,                                 \
-            int dilation_width,                                  \
-            int padding_height,                                  \
-            int padding_width,                                   \
-            int stride_height,                                   \
-            int stride_width);                                   \
+            void *output_sizes,                                  \
+            void *kernel_sizes,                                  \
+            void *dilations,                                     \
+            void *pads,                                          \
+            void *strides,                                       \
+            size_t n);                                           \
                                                                  \
         infiniStatus_t calculate(                                \
             void *workspace, size_t workspace_size,              \

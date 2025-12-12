@@ -10,16 +10,13 @@ __C __export infiniStatus_t infiniopCreateFoldDescriptor(
     infiniopFoldDescriptor_t *desc_ptr,
     infiniopTensorDescriptor_t y_desc,
     infiniopTensorDescriptor_t x_desc,
-    int output_height,
-    int output_width,
-    int kernel_height,
-    int kernel_width,
-    int dilation_height,
-    int dilation_width,
-    int padding_height,
-    int padding_width,
-    int stride_height,
-    int stride_width);
+    void *output,
+    void *kernel,
+    void *dilation,
+    void *padding,
+    void *stride,
+    size_t n);
+
 
 __C __export infiniStatus_t infiniopGetFoldWorkspaceSize(
     infiniopFoldDescriptor_t desc,
