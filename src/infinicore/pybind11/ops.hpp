@@ -9,6 +9,7 @@
 #include "ops/embedding.hpp"
 #include "ops/index_select.hpp"
 #include "ops/linear.hpp"
+#include "ops/log2.hpp"
 #include "ops/matmul.hpp"
 #include "ops/mish.hpp"
 #include "ops/mul.hpp"
@@ -31,6 +32,7 @@ inline void bind(py::module &m) {
     bind_random_sample(m);
     bind_index_select(m);
     bind_linear(m);
+    bind_log2(m);
     bind_matmul(m);
     bind_mish(m);
     bind_mul(m);

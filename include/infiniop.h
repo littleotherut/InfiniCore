@@ -13,6 +13,7 @@
 #include "infiniop/ops/gemm.h"
 #include "infiniop/ops/index_select.h"
 #include "infiniop/ops/layer_norm.h"
+#include "infiniop/ops/log2.h"
 #include "infiniop/ops/logsoftmax.h"
 #include "infiniop/ops/lp_norm.h"
 #include "infiniop/ops/mish.h"

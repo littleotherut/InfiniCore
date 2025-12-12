@@ -4,6 +4,7 @@
 #include "ops/attention.hpp"
 #include "ops/bitwise_left_shift.hpp"
 #include "ops/causal_softmax.hpp"
+#include "ops/log2.hpp"
 #include "ops/matmul.hpp"
 #include "ops/mish.hpp"
 #include "ops/ones.hpp"

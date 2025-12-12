@@ -42,6 +42,7 @@ from infinicore.dtype import (
 from infinicore.ops.add import add
 from infinicore.ops.attention import attention
 from infinicore.ops.index_select import index_select
+from infinicore.ops.log2 import log2
 from infinicore.ops.matmul import matmul
 from infinicore.ops.mul import mul
 from infinicore.ops.narrow import narrow
