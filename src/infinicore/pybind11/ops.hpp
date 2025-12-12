@@ -10,6 +10,7 @@
 #include "ops/index_select.hpp"
 #include "ops/linear.hpp"
 #include "ops/matmul.hpp"
+#include "ops/mish.hpp"
 #include "ops/mul.hpp"
 #include "ops/random_sample.hpp"
 #include "ops/rearrange.hpp"
@@ -31,6 +32,7 @@ inline void bind(py::module &m) {
     bind_index_select(m);
     bind_linear(m);
     bind_matmul(m);
+    bind_mish(m);
     bind_mul(m);
     bind_rearrange(m);
     bind_rms_norm(m);
