@@ -8,6 +8,45 @@
 
 namespace op::fold::moore {
 
+template <typename accT, typename dt>
+void col2im_batched(
+    musaStream_t stream,
+    const dt *data_col,
+    const size_t col_batch_stride,
+    const size_t nbatch,
+    const size_t channels,
+    const size_t height,
+    const size_t width,
+    const size_t height_col,
+    const size_t width_col,
+    const size_t patch_height,
+    const size_t patch_width,
+    const size_t pad_height,
+    const size_t pad_width,
+    const size_t stride_height,
+    const size_t stride_width,
+    const size_t dilation_height,
+    const size_t dilation_width,
+    dt *data_im,
+    const size_t im_batch_stride) {
+
+    const size_t num_kernels = channels * height * width;
+    const size_t output_numel = nbatch * num_kernels;
+    if (output_numel == 0) {
+        return;
+    }
+
+    size_t block = 512;
+    size_t grid = (output_numel + block - 1) / block;
+
+    col2im_batched_kernel<accT><<<grid, block, 0, stream>>>(
+        num_kernels, data_col, col_batch_stride, nbatch,
+        height, width, patch_height, patch_width,
+        pad_height, pad_width, stride_height, stride_width,
+        dilation_height, dilation_width, height_col, width_col,
+        data_im, im_batch_stride);
+}
+
 template <typename accT, typename T>
 static infiniStatus_t fold_moore_impl(
     const FoldInfo &info,

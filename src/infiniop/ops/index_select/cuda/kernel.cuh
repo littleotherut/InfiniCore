@@ -1,7 +1,6 @@
 #ifndef __INDEX_SELECT_CUDA_KERNEL_H__
 #define __INDEX_SELECT_CUDA_KERNEL_H__
 
-#include <cuda_runtime.h>
 
 namespace infiniop::index_select::cuda {
 
