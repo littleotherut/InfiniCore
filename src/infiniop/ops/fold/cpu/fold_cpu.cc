@@ -102,7 +102,7 @@ static void col2im_2d(
     T *data_im) {
 
     // 先清零输出
-    // std::fill_n(data_im, height * width * channels, T(0));
+    std::fill_n(data_im, height * width * channels, utils::cast<T,int>(0));
 
     // channels_col = C * kH * kW
     const size_t channels_col = channels * kernel_h * kernel_w;

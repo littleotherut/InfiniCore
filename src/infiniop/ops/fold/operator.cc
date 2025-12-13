@@ -37,9 +37,9 @@ __C __export infiniStatus_t infiniopCreateFoldDescriptor(
 #ifdef ENABLE_CPU_API
         CREATE(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         CREATE(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        CREATE(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 #ifdef ENABLE_ILUVATAR_API
         CREATE(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
@@ -65,9 +65,9 @@ infiniopGetFoldWorkspaceSize(
 #ifdef ENABLE_CPU_API
         GET(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         GET(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        GET(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 #ifdef ENABLE_ILUVATAR_API
         GET(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
@@ -95,9 +95,9 @@ __C infiniStatus_t infiniopFold(
 #ifdef ENABLE_CPU_API
         CALCULATE(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         CALCULATE(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        CALCULATE(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 #ifdef ENABLE_ILUVATAR_API
         CALCULATE(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
@@ -118,9 +118,9 @@ infiniopDestroyFoldDescriptor(infiniopFoldDescriptor_t desc) {
 #ifdef ENABLE_CPU_API
         DELETE(INFINI_DEVICE_CPU, cpu);
 #endif
-// #ifdef ENABLE_NVIDIA_API
-//         DELETE(INFINI_DEVICE_NVIDIA, nvidia);
-// #endif
+#ifdef ENABLE_NVIDIA_API
+        DELETE(INFINI_DEVICE_NVIDIA, nvidia);
+#endif
 #ifdef ENABLE_ILUVATAR_API
         DELETE(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
