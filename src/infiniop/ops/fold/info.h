@@ -9,9 +9,6 @@
 #include <cstdint>
 #include <vector>
 
-#ifdef ENABLE_CUDA_API
-#include "../../devices/nvidia/nvidia_handle.cuh"
-#endif
 
 namespace op::fold {
 class FoldInfo;

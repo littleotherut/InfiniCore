@@ -1,19 +1,19 @@
-#include "../../../devices/nvidia/nvidia_common.cuh"
-#include "../../../devices/nvidia/nvidia_handle.cuh"
-#include "../../../devices/nvidia/nvidia_kernel_common.cuh"
+#include "../../../devices/moore/moore_common.h"
+#include "../../../devices/moore/moore_handle.h"
+#include "../../../devices/moore/moore_kernel_common.h"
 #include "../cuda/kernel.cuh"
-#include "fold_nvidia.cuh"
+#include "fold_moore.cuh"
 #include <algorithm>
 #include <cstring>
 
-namespace op::fold::nvidia {
+namespace op::fold::moore {
 
 template <typename accT, typename T>
-static infiniStatus_t fold_cuda_impl(
+static infiniStatus_t fold_moore_impl(
     const FoldInfo &info,
     T *y,
     const T *x,
-    cudaStream_t stream) {
+    musaStream_t stream) {
 
     // 目前仅支持 2D (ndim == 2)
     if (info.ndim() != 2) {
@@ -87,7 +87,7 @@ infiniStatus_t Descriptor::create(
     void *strides,
     size_t n) {
 
-    auto handle = reinterpret_cast<device::nvidia::Handle *>(handle_);
+    auto handle = reinterpret_cast<device::moore::Handle *>(handle_);
     auto dtype = y_desc->dtype();
 
     CHECK_DTYPE(dtype, INFINI_DTYPE_F16, INFINI_DTYPE_F32, INFINI_DTYPE_BF16);
@@ -114,25 +114,25 @@ infiniStatus_t Descriptor::calculate(
     const void *x,
     void *stream_) const {
 
-    cudaStream_t stream = reinterpret_cast<cudaStream_t>(stream_);
+    musaStream_t stream = reinterpret_cast<musaStream_t>(stream_);
 
     switch (_dtype) {
     case INFINI_DTYPE_F32:
-        return fold_cuda_impl<float, float>(
+        return fold_moore_impl<float, float>(
             _info,
             reinterpret_cast<float *>(y),
             reinterpret_cast<const float *>(x),
             stream);
 
     case INFINI_DTYPE_F16:
-        return fold_cuda_impl<float, half>(
+        return fold_moore_impl<float, half>(
             _info,
             reinterpret_cast<half *>(y),
             reinterpret_cast<const half *>(x),
             stream);
 
     case INFINI_DTYPE_BF16:
-        return fold_cuda_impl<float, cuda_bfloat16>(
+        return fold_moore_impl<float, cuda_bfloat16>(
             _info,
             reinterpret_cast<cuda_bfloat16 *>(y),
             reinterpret_cast<const cuda_bfloat16 *>(x),
@@ -143,4 +143,4 @@ infiniStatus_t Descriptor::calculate(
     }
 }
 
-} // namespace op::fold::nvidia
+} // namespace op::fold::moore

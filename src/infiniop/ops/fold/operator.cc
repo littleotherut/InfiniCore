@@ -8,6 +8,12 @@
 #if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API) 
 #include "nvidia/fold_nvidia.cuh"
 #endif
+#ifdef ENABLE_METAX_API
+#include "metax/fold_metax.h"
+#endif
+#ifdef ENABLE_MOORE_API
+#include "moore/fold_moore.h"
+#endif
 
 __C __export infiniStatus_t infiniopCreateFoldDescriptor(
     infiniopHandle_t handle,
@@ -43,6 +49,12 @@ __C __export infiniStatus_t infiniopCreateFoldDescriptor(
 #ifdef ENABLE_ILUVATAR_API
         CREATE(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
+#ifdef ENABLE_METAX_API
+        CREATE(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        CREATE(INFINI_DEVICE_MOORE, moore);
+#endif
 
     default:
         return INFINI_STATUS_DEVICE_TYPE_NOT_SUPPORTED;
@@ -71,7 +83,13 @@ infiniopGetFoldWorkspaceSize(
 #ifdef ENABLE_ILUVATAR_API
         GET(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
-    
+#ifdef ENABLE_METAX_API
+        GET(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        GET(INFINI_DEVICE_MOORE, moore);
+#endif
+
     default:
         return INFINI_STATUS_DEVICE_TYPE_NOT_SUPPORTED;
     }
@@ -101,6 +119,12 @@ __C infiniStatus_t infiniopFold(
 #ifdef ENABLE_ILUVATAR_API
         CALCULATE(INFINI_DEVICE_ILUVATAR, nvidia);
 #endif
+#ifdef ENABLE_METAX_API
+        CALCULATE(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        CALCULATE(INFINI_DEVICE_MOORE, moore);
+#endif
 
     default:
         return INFINI_STATUS_DEVICE_TYPE_NOT_SUPPORTED;
@@ -110,9 +134,9 @@ __C infiniStatus_t infiniopFold(
 
 __C infiniStatus_t 
 infiniopDestroyFoldDescriptor(infiniopFoldDescriptor_t desc) {
-#define DELETE(CASE, NAMESPACE)                                                    \
-    case CASE:                                                                      \
-        delete reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc);     \ 
+#define DELETE(CASE, NAMESPACE)                                                \
+    case CASE:                                                                 \
+        delete reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc);\
         return INFINI_STATUS_SUCCESS;
     switch (desc->device_type) {
 #ifdef ENABLE_CPU_API
@@ -123,6 +147,12 @@ infiniopDestroyFoldDescriptor(infiniopFoldDescriptor_t desc) {
 #endif
 #ifdef ENABLE_ILUVATAR_API
         DELETE(INFINI_DEVICE_ILUVATAR, nvidia);
+#endif
+#ifdef ENABLE_METAX_API
+        DELETE(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        DELETE(INFINI_DEVICE_MOORE, moore);
 #endif
 
     default:
