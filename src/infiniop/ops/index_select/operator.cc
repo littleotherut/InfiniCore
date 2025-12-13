@@ -8,12 +8,12 @@
 #if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API)
 #include "nvidia/index_select_nvidia.cuh"
 #endif
-// #ifdef ENABLE_METAX_API
-// #include "metax/index_select_metax.cuh"
-// #endif
-// #ifdef ENABLE_MOORE_API
-// #include "moore/index_select_moore.h"
-// #endif
+#ifdef ENABLE_METAX_API
+#include "metax/index_select_metax.h"
+#endif
+#ifdef ENABLE_MOORE_API
+#include "moore/index_select_moore.h"
+#endif
 
 __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
     infiniopHandle_t handle,
@@ -40,15 +40,15 @@ __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
 #ifdef ENABLE_NVIDIA_API
         CREATE(INFINI_DEVICE_NVIDIA, nvidia);
 #endif
-// #ifdef ENABLE_ILUVATAR_API
-//         CREATE(INFINI_DEVICE_ILUVATAR, nvidia);
-// #endif
-// #ifdef ENABLE_METAX_API
-//         CREATE(INFINI_DEVICE_METAX, metax);
-// #endif
-// #ifdef ENABLE_MOORE_API
-//         CREATE(INFINI_DEVICE_MOORE, moore);
-// #endif
+#ifdef ENABLE_ILUVATAR_API
+        CREATE(INFINI_DEVICE_ILUVATAR, nvidia);
+#endif
+#ifdef ENABLE_METAX_API
+        CREATE(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        CREATE(INFINI_DEVICE_MOORE, moore);
+#endif
     }
 #undef CREATE
 
@@ -70,15 +70,15 @@ __C infiniStatus_t infiniopGetIndexSelectWorkspaceSize(
 #ifdef ENABLE_NVIDIA_API
         GET(INFINI_DEVICE_NVIDIA, nvidia);
 #endif
-// #ifdef ENABLE_ILUVATAR_API
-//         GET(INFINI_DEVICE_ILUVATAR, nvidia);
-// #endif
-// #ifdef ENABLE_METAX_API
-//         GET(INFINI_DEVICE_METAX, metax);
-// #endif
-// #ifdef ENABLE_MOORE_API
-//         GET(INFINI_DEVICE_MOORE, moore);
-// #endif
+#ifdef ENABLE_ILUVATAR_API
+        GET(INFINI_DEVICE_ILUVATAR, nvidia);
+#endif
+#ifdef ENABLE_METAX_API
+        GET(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        GET(INFINI_DEVICE_MOORE, moore);
+#endif
     }
 #undef GET
 
@@ -105,15 +105,15 @@ __C infiniStatus_t infiniopIndexSelect(
 #ifdef ENABLE_NVIDIA_API
         CALCULATE(INFINI_DEVICE_NVIDIA, nvidia);
 #endif
-// #ifdef ENABLE_ILUVATAR_API
-//         CALCULATE(INFINI_DEVICE_ILUVATAR, nvidia);
-// #endif
-// #ifdef ENABLE_METAX_API
-//         CALCULATE(INFINI_DEVICE_METAX, metax);
-// #endif
-// #ifdef ENABLE_MOORE_API
-//         CALCULATE(INFINI_DEVICE_MOORE, moore);
-// #endif
+#ifdef ENABLE_ILUVATAR_API
+        CALCULATE(INFINI_DEVICE_ILUVATAR, nvidia);
+#endif
+#ifdef ENABLE_METAX_API
+        CALCULATE(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        CALCULATE(INFINI_DEVICE_MOORE, moore);
+#endif
     }
 #undef CALCULATE
 
@@ -134,15 +134,15 @@ __C infiniStatus_t infiniopDestroyIndexSelectDescriptor(
 #ifdef ENABLE_NVIDIA_API
         DESTROY(INFINI_DEVICE_NVIDIA, nvidia);
 #endif
-// #ifdef ENABLE_ILUVATAR_API
-//         DESTROY(INFINI_DEVICE_ILUVATAR, nvidia);
-// #endif
-// #ifdef ENABLE_METAX_API
-//         DESTROY(INFINI_DEVICE_METAX, metax);
-// #endif
-// #ifdef ENABLE_MOORE_API
-//         DESTROY(INFINI_DEVICE_MOORE, moore);
-// #endif
+#ifdef ENABLE_ILUVATAR_API
+        DESTROY(INFINI_DEVICE_ILUVATAR, nvidia);
+#endif
+#ifdef ENABLE_METAX_API
+        DESTROY(INFINI_DEVICE_METAX, metax);
+#endif
+#ifdef ENABLE_MOORE_API
+        DESTROY(INFINI_DEVICE_MOORE, moore);
+#endif
     }
 #undef DESTROY
 
