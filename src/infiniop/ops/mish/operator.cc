@@ -15,19 +15,18 @@
 #include "moore/mish_moore.h"
 #endif
 
-
 __C infiniStatus_t infiniopCreateMishDescriptor(
     infiniopHandle_t handle,
     infiniopMishDescriptor_t *desc_ptr,
     infiniopTensorDescriptor_t y_desc,
     infiniopTensorDescriptor_t x_desc) {
 
-#define CREATE(CASE, NAMESPACE)                                                 \
-    case CASE:                                                                  \
+#define CREATE(CASE, NAMESPACE)                                             \
+    case CASE:                                                              \
         return op::mish::NAMESPACE::Descriptor::create(                     \
-            handle,                                                             \
+            handle,                                                         \
             reinterpret_cast<op::mish::NAMESPACE::Descriptor **>(desc_ptr), \
-            y_desc,                                                             \
+            y_desc,                                                         \
             {x_desc})
 
     switch (handle->device) {
@@ -56,8 +55,8 @@ __C infiniStatus_t infiniopCreateMishDescriptor(
 
 __C infiniStatus_t infiniopGetMishWorkspaceSize(infiniopMishDescriptor_t desc, size_t *size) {
 
-#define GET(CASE, NAMESPACE)                                                                    \
-    case CASE:                                                                                  \
+#define GET(CASE, NAMESPACE)                                                                \
+    case CASE:                                                                              \
         *size = reinterpret_cast<op::mish::NAMESPACE::Descriptor *>(desc)->workspaceSize(); \
         return INFINI_STATUS_SUCCESS
 
@@ -93,8 +92,8 @@ __C infiniStatus_t infiniopMish(
     const void *x,
     void *stream) {
 
-#define CALCULATE(CASE, NAMESPACE)                                                 \
-    case CASE:                                                                     \
+#define CALCULATE(CASE, NAMESPACE)                                             \
+    case CASE:                                                                 \
         return reinterpret_cast<const op::mish::NAMESPACE::Descriptor *>(desc) \
             ->calculate(workspace, workspace_size, y, {x}, stream)
 
@@ -125,8 +124,8 @@ __C infiniStatus_t infiniopMish(
 __C infiniStatus_t
 infiniopDestroyMishDescriptor(infiniopMishDescriptor_t desc) {
 
-#define DELETE(CASE, NAMESPACE)                                                     \
-    case CASE:                                                                      \
+#define DELETE(CASE, NAMESPACE)                                                 \
+    case CASE:                                                                  \
         delete reinterpret_cast<const op::mish::NAMESPACE::Descriptor *>(desc); \
         return INFINI_STATUS_SUCCESS
 

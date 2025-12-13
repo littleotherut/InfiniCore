@@ -16,12 +16,12 @@ thread_local common::OpCache<size_t, infiniopFoldDescriptor_t> caches(
     });
 
 void calculate(Tensor y, Tensor x, Param2 output_size, Param2 kernel_size,
-    Param2 dilation, Param2 padding, Param2 stride) {
+               Param2 dilation, Param2 padding, Param2 stride) {
     size_t seed = hash_combine(y, x, output_size.h, output_size.w,
-        kernel_size.h, kernel_size.w,
-        dilation.h, dilation.w,
-        padding.h, padding.w,
-        stride.h, stride.w);
+                               kernel_size.h, kernel_size.w,
+                               dilation.h, dilation.w,
+                               padding.h, padding.w,
+                               stride.h, stride.w);
 
     auto device_type = context::getDevice().getType();
     auto device_index = context::getDevice().getIndex();
@@ -36,24 +36,19 @@ void calculate(Tensor y, Tensor x, Param2 output_size, Param2 kernel_size,
         // Param2 内部是 int64_t，在 64 位系统上与 size_t/ptrdiff_t 兼容
         size_t output_arr[2] = {
             static_cast<size_t>(output_size.h),
-            static_cast<size_t>(output_size.w)
-        };
+            static_cast<size_t>(output_size.w)};
         size_t kernel_arr[2] = {
             static_cast<size_t>(kernel_size.h),
-            static_cast<size_t>(kernel_size.w)
-        };
+            static_cast<size_t>(kernel_size.w)};
         size_t dilation_arr[2] = {
             static_cast<size_t>(dilation.h),
-            static_cast<size_t>(dilation.w)
-        };
+            static_cast<size_t>(dilation.w)};
         size_t padding_arr[2] = {
             static_cast<size_t>(padding.h),
-            static_cast<size_t>(padding.w)
-        };
+            static_cast<size_t>(padding.w)};
         ptrdiff_t stride_arr[2] = {
             static_cast<ptrdiff_t>(stride.h),
-            static_cast<ptrdiff_t>(stride.w)
-        };
+            static_cast<ptrdiff_t>(stride.w)};
 
         INFINICORE_CHECK_ERROR(infiniopCreateFoldDescriptor(
             context::getInfiniopHandle(y->device()), &desc,

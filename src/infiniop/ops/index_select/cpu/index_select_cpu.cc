@@ -1,8 +1,8 @@
 #include "index_select_cpu.h"
 #include "../../../devices/cpu/common_cpu.h"
 #include "../../../reduce/cpu/reduce.h"
-#include <cmath>
 #include <algorithm>
+#include <cmath>
 
 namespace op::index_select::cpu {
 
@@ -117,7 +117,7 @@ infiniStatus_t Descriptor::calculate(
 
     // indices 类型固定为 int64_t (INFINI_DTYPE_I64)
     const int64_t *idx_ptr = reinterpret_cast<const int64_t *>(indices);
-    
+
     if (_info.atype == INFINI_DTYPE_F32) {
         return indexSelect<float, int64_t>(&_info, (float *)y, (const float *)x, idx_ptr);
     } else if (_info.atype == INFINI_DTYPE_F16) {
@@ -127,7 +127,7 @@ infiniStatus_t Descriptor::calculate(
     } else if (_info.atype == INFINI_DTYPE_F64) {
         return indexSelect<double, int64_t>(&_info, (double *)y, (const double *)x, idx_ptr);
     }
-    
+
     return INFINI_STATUS_BAD_TENSOR_DTYPE;
 }
 

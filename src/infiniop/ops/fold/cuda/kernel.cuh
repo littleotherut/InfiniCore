@@ -113,5 +113,4 @@ __launch_bounds__(512)
     }
 }
 
-
 #endif // __FOLD_CUDA_H__

@@ -6,7 +6,7 @@
 namespace infinicore::op {
 class IndexSelect {
 public:
-    using schema = void (*)(Tensor, Tensor, int,  Tensor);
+    using schema = void (*)(Tensor, Tensor, int, Tensor);
     static void execute(Tensor y, Tensor x, int dim, Tensor indices);
     static common::OpDispatcher<schema> &dispatcher();
 };

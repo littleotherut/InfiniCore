@@ -17,7 +17,6 @@ __C __export infiniStatus_t infiniopCreateFoldDescriptor(
     void *stride,
     size_t n);
 
-
 __C __export infiniStatus_t infiniopGetFoldWorkspaceSize(
     infiniopFoldDescriptor_t desc,
     size_t *size);

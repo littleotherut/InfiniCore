@@ -2,7 +2,7 @@
 
 #include "../../utils.hpp"
 
-namespace infinicore::op{
+namespace infinicore::op {
 
 common::OpDispatcher<IndexSelect::schema> &IndexSelect::dispatcher() {
     static common::OpDispatcher<IndexSelect::schema> dispatcher_;
@@ -17,7 +17,7 @@ void IndexSelect::execute(Tensor y, Tensor x, int dim, Tensor indices) {
 
 Tensor index_select(Tensor x, int dim, Tensor indices) {
     infinicore::Shape y_shape = x->shape();
-    if(dim < 0){
+    if (dim < 0) {
         dim += x->ndim();
     }
     y_shape[dim] = indices->shape()[0];

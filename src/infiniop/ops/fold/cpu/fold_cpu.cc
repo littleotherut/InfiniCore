@@ -102,7 +102,7 @@ static void col2im_2d(
     T *data_im) {
 
     // 先清零输出
-    std::fill_n(data_im, height * width * channels, utils::cast<T,int>(0));
+    std::fill_n(data_im, height * width * channels, utils::cast<T, int>(0));
 
     // channels_col = C * kH * kW
     const size_t channels_col = channels * kernel_h * kernel_w;
@@ -127,8 +127,7 @@ static void col2im_2d(
                                + static_cast<ptrdiff_t>(w_offset * dilation_w);
 
                 // 边界检查：只有在有效范围内才累加
-                if (h_im >= 0 && h_im < static_cast<ptrdiff_t>(height) &&
-                    w_im >= 0 && w_im < static_cast<ptrdiff_t>(width)) {
+                if (h_im >= 0 && h_im < static_cast<ptrdiff_t>(height) && w_im >= 0 && w_im < static_cast<ptrdiff_t>(width)) {
 
                     // data_im 索引: (c_im, h_im, w_im) -> c_im * H * W + h_im * W + w_im
                     size_t im_idx = (c_im * height + static_cast<size_t>(h_im)) * width
@@ -137,9 +136,8 @@ static void col2im_2d(
                     // data_col 索引: (c_col, h_col, w_col) -> c_col * L + h_col * width_col + w_col
                     size_t col_idx = (c_col * height_col + h_col) * width_col + w_col;
 
-                    data_im[im_idx] = utils::cast<T,double>(
-                        utils::cast<double,T>(data_im[im_idx]) + 
-                        utils::cast<double,T>(data_col[col_idx]));
+                    data_im[im_idx] = utils::cast<T, double>(
+                        utils::cast<double, T>(data_im[im_idx]) + utils::cast<double, T>(data_col[col_idx]));
                 }
             }
         }
@@ -167,10 +165,10 @@ static infiniStatus_t fold_cpu_impl(
 
     const size_t batch = info.batch();
     const size_t channels = info.channels();
-    const size_t height = info.output_dim(0);    // H
-    const size_t width = info.output_dim(1);     // W
-    const size_t height_col = info.col_dim(0);   // 滑窗位置数 (H 方向)
-    const size_t width_col = info.col_dim(1);    // 滑窗位置数 (W 方向)
+    const size_t height = info.output_dim(0);  // H
+    const size_t width = info.output_dim(1);   // W
+    const size_t height_col = info.col_dim(0); // 滑窗位置数 (H 方向)
+    const size_t width_col = info.col_dim(1);  // 滑窗位置数 (W 方向)
     const size_t kernel_h = info.kernel_dim(0);
     const size_t kernel_w = info.kernel_dim(1);
     const size_t pad_h = info.pad_info(0);
@@ -224,26 +222,26 @@ infiniStatus_t Descriptor::calculate(
     void * /*stream*/) const {
 
     switch (_dtype) {
-        case INFINI_DTYPE_F32:
-            return fold_cpu_impl<float>(
-                _info,
-                reinterpret_cast<float *>(y),
-                reinterpret_cast<const float *>(x));
+    case INFINI_DTYPE_F32:
+        return fold_cpu_impl<float>(
+            _info,
+            reinterpret_cast<float *>(y),
+            reinterpret_cast<const float *>(x));
 
-        case INFINI_DTYPE_F16:
-            return fold_cpu_impl<fp16_t>(
-                _info,
-                reinterpret_cast<fp16_t *>(y),
-                reinterpret_cast<const fp16_t *>(x));
+    case INFINI_DTYPE_F16:
+        return fold_cpu_impl<fp16_t>(
+            _info,
+            reinterpret_cast<fp16_t *>(y),
+            reinterpret_cast<const fp16_t *>(x));
 
-        case INFINI_DTYPE_BF16:
-            return fold_cpu_impl<bf16_t>(
-                _info,
-                reinterpret_cast<bf16_t *>(y),
-                reinterpret_cast<const bf16_t *>(x));
+    case INFINI_DTYPE_BF16:
+        return fold_cpu_impl<bf16_t>(
+            _info,
+            reinterpret_cast<bf16_t *>(y),
+            reinterpret_cast<const bf16_t *>(x));
 
-        default:
-            return INFINI_STATUS_BAD_TENSOR_DTYPE;
+    default:
+        return INFINI_STATUS_BAD_TENSOR_DTYPE;
     }
 }
 

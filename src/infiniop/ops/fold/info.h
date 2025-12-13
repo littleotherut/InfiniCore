@@ -9,7 +9,6 @@
 #include <cstdint>
 #include <vector>
 
-
 namespace op::fold {
 class FoldInfo;
 } // namespace op::fold

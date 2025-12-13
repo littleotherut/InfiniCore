@@ -1,22 +1,21 @@
 #ifndef __INDEX_SELECT_CUDA_KERNEL_H__
 #define __INDEX_SELECT_CUDA_KERNEL_H__
 
-
 namespace infiniop::index_select::cuda {
 
 template <typename Tdata, typename Tidx>
 __global__ void index_select_kernel(
-    Tdata * __restrict__ y,
-    const Tdata * __restrict__ x,
-    const Tidx * __restrict__ indices,
+    Tdata *__restrict__ y,
+    const Tdata *__restrict__ x,
+    const Tidx *__restrict__ indices,
     int dim,
     int ndim,
     size_t num_indices,
     size_t outer_size,
     size_t inner_size,
-    const size_t * __restrict__ shape,
-    const ptrdiff_t * __restrict__ x_strides,
-    const ptrdiff_t * __restrict__ y_strides) {
+    const size_t *__restrict__ shape,
+    const ptrdiff_t *__restrict__ x_strides,
+    const ptrdiff_t *__restrict__ y_strides) {
 
     size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
     size_t total_elements = outer_size * num_indices * inner_size;
@@ -24,7 +23,7 @@ __global__ void index_select_kernel(
     if (idx >= total_elements) {
         return;
     }
-    
+
     size_t inner_idx = idx % inner_size;
     size_t tmp = idx / inner_size;
     size_t idx_pos = tmp % num_indices;

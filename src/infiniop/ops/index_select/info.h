@@ -23,17 +23,15 @@ public:
         infiniopTensorDescriptor_t y_desc,
         infiniopTensorDescriptor_t x_desc,
         infiniopTensorDescriptor_t indices_desc,
-        int dim) { 
+        int dim) {
 
         auto atype = y_desc->dtype();
-        if (x_desc->dtype() != atype){
+        if (x_desc->dtype() != atype) {
             return INFINI_STATUS_BAD_TENSOR_DTYPE;
         }
-        if (atype != INFINI_DTYPE_F16 && atype != INFINI_DTYPE_BF16 &&
-            atype != INFINI_DTYPE_F32 && atype != INFINI_DTYPE_F64) {
+        if (atype != INFINI_DTYPE_F16 && atype != INFINI_DTYPE_BF16 && atype != INFINI_DTYPE_F32 && atype != INFINI_DTYPE_F64) {
             return INFINI_STATUS_BAD_TENSOR_DTYPE;
         }
-
 
         const size_t y_ndim = y_desc->ndim();
         const size_t x_ndim = x_desc->ndim();
@@ -41,19 +39,19 @@ public:
         if (dim < 0) {
             dim += x_ndim;
         }
-        
-        if (y_ndim != x_ndim ) {
+
+        if (y_ndim != x_ndim) {
             return INFINI_STATUS_BAD_TENSOR_SHAPE;
         }
 
-        for (size_t i = 0; i < y_ndim ; ++i) {
+        for (size_t i = 0; i < y_ndim; ++i) {
             if (i == static_cast<size_t>(dim)) {
-                if (y_desc->dim(i) != indices_desc->dim(0)){
+                if (y_desc->dim(i) != indices_desc->dim(0)) {
                     return INFINI_STATUS_BAD_TENSOR_SHAPE;
                 }
                 continue;
             }
-            if (x_desc->dim(i) != y_desc->dim(i)){
+            if (x_desc->dim(i) != y_desc->dim(i)) {
                 return INFINI_STATUS_BAD_TENSOR_SHAPE;
             }
         }
@@ -64,12 +62,9 @@ public:
             y_desc->strides(),
             x_desc->strides(),
             dim,
-            indices_desc->dim(0)
-        });
-
+            indices_desc->dim(0)});
     }
-
 };
-} // namespace op::adaptive_max_pool1d
+} // namespace op::index_select
 
 #endif // __INDEX_SELECT_H__

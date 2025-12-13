@@ -28,4 +28,4 @@ __C __export infiniStatus_t infiniopIndexSelect(
 
 __C __export infiniStatus_t infiniopDestroyIndexSelectDescriptor(infiniopIndexSelectDescriptor_t desc);
 
-#endif 
+#endif

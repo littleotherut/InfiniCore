@@ -5,7 +5,7 @@
 #ifdef ENABLE_CPU_API
 #include "cpu/fold_cpu.h"
 #endif
-#if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API) 
+#if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API)
 #include "nvidia/fold_nvidia.cuh"
 #endif
 #ifdef ENABLE_METAX_API
@@ -33,11 +33,11 @@ __C __export infiniStatus_t infiniopCreateFoldDescriptor(
             reinterpret_cast<op::fold::NAMESPACE::Descriptor **>(desc_ptr), \
             y_desc,                                                         \
             x_desc,                                                         \
-            output,                                                        \
-            kernel,                                                        \
+            output,                                                         \
+            kernel,                                                         \
             dilation,                                                       \
-            padding,                                                       \
-            stride,                                                        \
+            padding,                                                        \
+            stride,                                                         \
             n);
     switch (handle->device) {
 #ifdef ENABLE_CPU_API
@@ -103,10 +103,10 @@ __C infiniStatus_t infiniopFold(
     void *y,
     const void *x,
     void *stream) {
-#define CALCULATE(CASE, NAMESPACE)                                                  \
-    case CASE:                                                                      \
-        return reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc)      \
-            ->calculate(                                                            \
+#define CALCULATE(CASE, NAMESPACE)                                             \
+    case CASE:                                                                 \
+        return reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc) \
+            ->calculate(                                                       \
                 workspace, workspace_size, y, x, stream)
     switch (desc->device_type) {
 
@@ -132,11 +132,11 @@ __C infiniStatus_t infiniopFold(
 #undef CALCULATE
 }
 
-__C infiniStatus_t 
+__C infiniStatus_t
 infiniopDestroyFoldDescriptor(infiniopFoldDescriptor_t desc) {
-#define DELETE(CASE, NAMESPACE)                                                \
-    case CASE:                                                                 \
-        delete reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc);\
+#define DELETE(CASE, NAMESPACE)                                                 \
+    case CASE:                                                                  \
+        delete reinterpret_cast<const op::fold::NAMESPACE::Descriptor *>(desc); \
         return INFINI_STATUS_SUCCESS;
     switch (desc->device_type) {
 #ifdef ENABLE_CPU_API

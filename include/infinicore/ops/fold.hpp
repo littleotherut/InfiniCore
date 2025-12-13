@@ -19,15 +19,15 @@ struct Param2 {
 class Fold {
 public:
     using schema = void (*)(Tensor, Tensor, Param2, Param2, Param2, Param2, Param2);
-    
-        static void execute(Tensor y, Tensor x, Param2 output_size, Param2 kernel_size,
-                            Param2 dilation, Param2 padding, Param2 stride);
+
+    static void execute(Tensor y, Tensor x, Param2 output_size, Param2 kernel_size,
+                        Param2 dilation, Param2 padding, Param2 stride);
 
     static common::OpDispatcher<schema> &dispatcher();
 };
 
-Tensor fold (Tensor x, Param2 output_size, Param2 kernel_size,
+Tensor fold(Tensor x, Param2 output_size, Param2 kernel_size,
             Param2 dilation, Param2 padding, Param2 stride);
-void fold_ (Tensor y, Tensor x,  Param2 output_size, Param2 kernel_size,
-            Param2 dilation, Param2 padding, Param2 stride);
+void fold_(Tensor y, Tensor x, Param2 output_size, Param2 kernel_size,
+           Param2 dilation, Param2 padding, Param2 stride);
 } // namespace infinicore::op

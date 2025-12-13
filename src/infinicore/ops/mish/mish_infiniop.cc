@@ -1,7 +1,7 @@
 #include "../../utils.hpp"
 #include "infinicore/common/hash.hpp"
-#include "infinicore/ops/mish.hpp"
 #include "infinicore/ops/common/cache.hpp"
+#include "infinicore/ops/mish.hpp"
 #include <infiniop.h>
 
 namespace infinicore::op::mish_impl::infiniop {

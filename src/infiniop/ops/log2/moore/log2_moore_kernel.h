@@ -34,6 +34,6 @@ typedef struct Log2Op {
         }
     }
 } Log2Op;
-} // namespace op::log2::moore
+} // namespace op::log2::cuda
 
 #endif // __LOG2_MOORE_H__

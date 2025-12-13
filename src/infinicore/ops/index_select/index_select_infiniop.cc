@@ -29,7 +29,7 @@ void calculate(Tensor y, Tensor x, int dim, Tensor indices) {
     if (!desc_opt) {
         INFINICORE_CHECK_ERROR(infiniopCreateIndexSelectDescriptor(
             context::getInfiniopHandle(y->device()), &desc,
-            y->desc(), x->desc(), dim ,indices->desc()));
+            y->desc(), x->desc(), dim, indices->desc()));
         cache.put(seed, desc);
     } else {
         desc = *desc_opt;

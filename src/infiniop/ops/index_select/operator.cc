@@ -21,16 +21,16 @@ __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
     infiniopTensorDescriptor_t y_desc,
     infiniopTensorDescriptor_t x_desc,
     int dim,
-    infiniopTensorDescriptor_t indices_desc) {    
+    infiniopTensorDescriptor_t indices_desc) {
 
-#define CREATE(CASE, NAMESPACE)                                                 \
-    case CASE:                                                                  \
+#define CREATE(CASE, NAMESPACE)                                                     \
+    case CASE:                                                                      \
         return op::index_select::NAMESPACE::Descriptor::create(                     \
-            handle,                                                             \
+            handle,                                                                 \
             reinterpret_cast<op::index_select::NAMESPACE::Descriptor **>(desc_ptr), \
-            y_desc,                                                             \
-            x_desc,                                                             \
-            indices_desc,                                                        \
+            y_desc,                                                                 \
+            x_desc,                                                                 \
+            indices_desc,                                                           \
             dim);
 
     switch (handle->device) {
@@ -56,13 +56,13 @@ __C infiniStatus_t infiniopCreateIndexSelectDescriptor(
 }
 
 __C infiniStatus_t infiniopGetIndexSelectWorkspaceSize(
-    infiniopIndexSelectDescriptor_t desc, 
+    infiniopIndexSelectDescriptor_t desc,
     size_t *size) {
-#define GET(CASE, NAMESPACE)                                                                                \
-    case CASE:                                                                                              \
-        *size = reinterpret_cast<op::index_select::NAMESPACE::Descriptor *>(desc)->workspaceSize();  \
+#define GET(CASE, NAMESPACE)                                                                        \
+    case CASE:                                                                                      \
+        *size = reinterpret_cast<op::index_select::NAMESPACE::Descriptor *>(desc)->workspaceSize(); \
         return INFINI_STATUS_SUCCESS;
-    
+
     switch (desc->device_type) {
 #ifdef ENABLE_CPU_API
         GET(INFINI_DEVICE_CPU, cpu);
@@ -86,15 +86,15 @@ __C infiniStatus_t infiniopGetIndexSelectWorkspaceSize(
 }
 
 __C infiniStatus_t infiniopIndexSelect(
-    infiniopIndexSelectDescriptor_t desc, 
-    void *workspace, 
+    infiniopIndexSelectDescriptor_t desc,
+    void *workspace,
     size_t workspace_size,
-    void *y, 
-    const void *x, 
+    void *y,
+    const void *x,
     const void *indices,
     void *stream) {
-#define CALCULATE(CASE, NAMESPACE)                                              \
-    case CASE:                                                                \
+#define CALCULATE(CASE, NAMESPACE)                                                           \
+    case CASE:                                                                               \
         return reinterpret_cast<op::index_select::NAMESPACE::Descriptor *>(desc)->calculate( \
             workspace, workspace_size, y, x, indices, stream);
 
@@ -117,13 +117,13 @@ __C infiniStatus_t infiniopIndexSelect(
     }
 #undef CALCULATE
 
-        return INFINI_STATUS_DEVICE_TYPE_NOT_SUPPORTED;
+    return INFINI_STATUS_DEVICE_TYPE_NOT_SUPPORTED;
 }
 
 __C infiniStatus_t infiniopDestroyIndexSelectDescriptor(
     infiniopIndexSelectDescriptor_t desc) {
-#define DESTROY(CASE, NAMESPACE)                                              \
-    case CASE:                                                                \
+#define DESTROY(CASE, NAMESPACE)                                                  \
+    case CASE:                                                                    \
         delete reinterpret_cast<op::index_select::NAMESPACE::Descriptor *>(desc); \
         return INFINI_STATUS_SUCCESS;
 

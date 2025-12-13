@@ -6,16 +6,16 @@
 
 #define DESCRIPTOR(NAMESPACE)                                    \
                                                                  \
-    namespace op::index_select::NAMESPACE {               \
+    namespace op::index_select::NAMESPACE {                      \
     class Descriptor final : public InfiniopDescriptor {         \
         struct Opaque;                                           \
         Opaque *_opaque;                                         \
-        IndexSelectInfo _info;                             \
+        IndexSelectInfo _info;                                   \
         size_t _workspace_size;                                  \
                                                                  \
         Descriptor(                                              \
             Opaque *opaque,                                      \
-            IndexSelectInfo info,                          \
+            IndexSelectInfo info,                                \
             size_t workspace_size,                               \
             infiniDevice_t device_type,                          \
             int device_id)                                       \

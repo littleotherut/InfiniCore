@@ -14,9 +14,7 @@ def fold(
     *,
     out: Tensor = None,
 ) -> Tensor:
-    r"""Combine an array of sliding local blocks into a large containing tensor.
-
-    """
+    r"""Combine an array of sliding local blocks into a large containing tensor."""
     # 将 int 转换为 tuple
     if isinstance(output_size, int):
         output_size = (output_size, output_size)
