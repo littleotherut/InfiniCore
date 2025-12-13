@@ -48,8 +48,8 @@ def print_discrepancy(
 
     is_terminal = sys.stdout.isatty()
 
-    actual_isnan = torch.isnan(actual)
-    expected_isnan = torch.isnan(expected)
+    actual_isnan = actual
+    expected_isnan = expected
 
     # Calculate difference mask
     nan_mismatch = (

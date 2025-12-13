@@ -2,7 +2,7 @@
 #include "../../../devices/moore/moore_handle.h"
 #include "../../../devices/moore/moore_kernel_common.h"
 #include "../cuda/kernel.cuh"
-#include "fold_moore.cuh"
+#include "fold_moore.h"
 #include <algorithm>
 #include <cstring>
 

@@ -1,5 +1,5 @@
 #include "../../../devices/moore/moore_common.h"
-#include "index_select_nvidia.h"
+#include "index_select_moore.h"
 
 #include "../../../devices/moore/moore_kernel_common.h"
 

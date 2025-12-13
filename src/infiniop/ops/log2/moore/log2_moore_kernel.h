@@ -4,7 +4,7 @@
 #include <cmath>
 #include <type_traits>
 
-namespace op::log2::cuda {
+namespace op::log2::moore {
 typedef struct Log2Op {
     static constexpr size_t num_inputs = 1;
 
@@ -15,12 +15,14 @@ typedef struct Log2Op {
     template <typename T>
     __device__ __forceinline__ T operator()(const T &x) const {
         if constexpr (std::is_same_v<T, half>) {
-            return hlog2(x);
+            return __float2half(log2_f32_func(__half2float(x)));
         } else if constexpr (std::is_same_v<T, cuda_bfloat16>) {
             float xf = __bfloat162float(x);
             return __float2bfloat16(log2_f32_func(xf));
         } else if constexpr (std::is_same_v<T, half2>) {
-            return h2log2(x);
+            float f0 = __low2float(x);
+            float f1 = __high2float(x);
+            return __floats2half2_rn(log2_f32_func(f0), log2_f32_func(f1));
         } else if constexpr (std::is_same_v<T, cuda_bfloat162>) {
             float f0 = __bfloat162float(__low2bfloat16(x));
             float f1 = __bfloat162float(__high2bfloat16(x));

@@ -1,7 +1,7 @@
-#include "../../../elementwise/moore/elementwise_moore.cuh"
+#include "../../../elementwise/moore/elementwise_moore.h"
 
 #include "../cuda/kernel.cuh"
-#include "bitwise_left_shift_moore.cuh"
+#include "bitwise_left_shift_moore.h"
 
 namespace op::bitwise_left_shift::moore {
 
