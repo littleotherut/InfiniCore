@@ -5,11 +5,8 @@
 #ifdef ENABLE_CPU_API
 #include "cpu/bitwise_left_shift_cpu.h"
 #endif
-#ifdef ENABLE_NVIDIA_API
+#if defined(ENABLE_NVIDIA_API) || defined(ENABLE_ILUVATAR_API) 
 #include "nvidia/bitwise_left_shift_nvidia.cuh"
-#endif
-#ifdef ENABLE_ILUVATAR_API
-#include "iluvatar/bitwise_left_shift_iluvatar.cu"
 #endif
 #ifdef ENABLE_METAX_API
 #include "metax/bitwise_left_shift_metax.h"
@@ -25,13 +22,13 @@ __C infiniStatus_t infiniopCreateBitwiseLeftShiftDescriptor(
     infiniopTensorDescriptor_t a_desc,
     infiniopTensorDescriptor_t b_desc) {
 
-#define CREATE(CASE, NAMESPACE)                                                           \
-    case CASE:                                                                            \
+#define CREATE(CASE, NAMESPACE)                                            \
+    case CASE:                                                             \
         return op::bitwise_left_shift::NAMESPACE::Descriptor::create(                     \
-            handle,                                                                       \
+            handle,                                                        \
             reinterpret_cast<op::bitwise_left_shift::NAMESPACE::Descriptor **>(desc_ptr), \
-            c_desc,                                                                       \
-            {a_desc,                                                                      \
+            c_desc,                                                        \
+            {a_desc,                                                       \
              b_desc})
 
     switch (handle->device) {
@@ -61,8 +58,8 @@ __C infiniStatus_t infiniopCreateBitwiseLeftShiftDescriptor(
 
 __C infiniStatus_t infiniopGetBitwiseLeftShiftWorkspaceSize(infiniopBitwiseLeftShiftDescriptor_t desc, size_t *size) {
 
-#define GET(CASE, NAMESPACE)                                                                              \
-    case CASE:                                                                                            \
+#define GET(CASE, NAMESPACE)                                                               \
+    case CASE:                                                                             \
         *size = reinterpret_cast<op::bitwise_left_shift::NAMESPACE::Descriptor *>(desc)->workspaceSize(); \
         return INFINI_STATUS_SUCCESS
 
@@ -99,8 +96,8 @@ __C infiniStatus_t infiniopBitwiseLeftShift(
     const void *b,
     void *stream) {
 
-#define CALCULATE(CASE, NAMESPACE)                                                           \
-    case CASE:                                                                               \
+#define CALCULATE(CASE, NAMESPACE)                                            \
+    case CASE:                                                                \
         return reinterpret_cast<const op::bitwise_left_shift::NAMESPACE::Descriptor *>(desc) \
             ->calculate(workspace, workspace_size, c, {a, b}, stream)
 
@@ -132,8 +129,8 @@ __C infiniStatus_t infiniopBitwiseLeftShift(
 __C infiniStatus_t
 infiniopDestroyBitwiseLeftShiftDescriptor(infiniopBitwiseLeftShiftDescriptor_t desc) {
 
-#define DELETE(CASE, NAMESPACE)                                                               \
-    case CASE:                                                                                \
+#define DELETE(CASE, NAMESPACE)                                                \
+    case CASE:                                                                 \
         delete reinterpret_cast<const op::bitwise_left_shift::NAMESPACE::Descriptor *>(desc); \
         return INFINI_STATUS_SUCCESS
 
